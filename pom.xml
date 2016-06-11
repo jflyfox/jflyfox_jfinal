@@ -8,11 +8,11 @@
 	<packaging>jar</packaging>
 	<name>jflyfox</name>
 	<description>jflyfox jfinal extend</description>
-	<url>http://git.oschina.net/flyfox/jflyfox_jfinal</url>
+	<url>https://github.com/jflyfox/jflyfox_jfinal</url>
 
 	<issueManagement>
-		<system>os@git Issue</system>
-		<url>http://git.oschina.net/flyfox/jflyfox_jfinal/issues</url>
+		<system>github Issue</system>
+		<url>https://github.com/jflyfox/jflyfox_jfinal/issues</url>
 	</issueManagement>
 
 	<licenses>
@@ -30,9 +30,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git@git.oschina.net:flyfox/jflyfox_jfinal.git</connection>
-		<developerConnection>scm:git@git.oschina.net:flyfox/jflyfox_jfinal.git</developerConnection>
-		<url>git@git.oschina.net:flyfox/jflyfox_jfinal.git</url>
+		<connection>scm:git@github.com:jflyfox/jflyfox_jfinal.git</connection>
+		<developerConnection>scm:git@github.com:jflyfox/jflyfox_jfinal.git</developerConnection>
+		<url>git@github.com:jflyfox/jflyfox_jfinal.git</url>
 	</scm>
 
 	<properties>
