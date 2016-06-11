@@ -17,6 +17,12 @@ jflyfox_jfinal是对Jfinal和beetl进行封装。
  2. [beetl](http://ibeetl.com/community/)
  3. [oschina](http://www.oschina.net/)
 
+Author
+------------------------
+
+georgefox ([@georgefox](https://github.com/jflyfox))<br/>
+mail: georgefox2016@hotmail.com
+
 开源赞助
 ------------------------
 
