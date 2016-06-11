@@ -1,0 +1,9 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+%>
+<% for(entry in obj){ %>
+	<option value="${entry.key}" ${entry.selected=="true"?"selected":"" }>${entry.value}</option>
+<% } %>
+<%
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+%>

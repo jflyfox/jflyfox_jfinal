@@ -1,0 +1,33 @@
+<% for(entry in crud.viewMap){ %>
+	<tr>
+		<td>${entry.value.name}</td>
+		<%if (entry.value.formType=="INPUT") {%>
+
+			<% if (entry.value.inputType=='TEXT') { %>
+				<td>${model[entry.value.key]}</td>
+			<% } else if (entry.value.inputType=='RADIO') { %>
+				<td>${flyfox.radioValue(entry.value.formTypeData,model[entry.value.key]!'')  }</td> 
+			<% } else if (entry.value.inputType=='CHECKBOX') { %>
+				<td>${flyfox.checkValue(entry.value.formTypeData,model[entry.value.key]!'')  }</td> 
+			<% } else { %>
+				<td>${model[entry.value.key]}</td>
+			<% } %>
+			
+		<% } else if (entry.value.formType=='TEXTAREA') { %>
+			<td title="${model[entry.value.key]}">
+			<%if (strutil.length(model[entry.value.key]) > 6) { %>
+				${strutil.subStringTo(model[entry.value.key], 0, 6)}...
+			<%	} else {%>
+				${model[entry.value.key] }
+			<% } %>
+			</td>
+		<% }  else if (entry.value.formType=='DICT') { %>
+			<td>${flyfox.dictValue( model[entry.value.key] )  }</td>
+		<% }  else if (entry.value.formType=='SELECT') { 
+			var selectData = crud.selectMap[entry.value.key];
+		%>
+			<td>${flyfox.selValue(selectData,model[entry.value.key])  }</td>
+		<%}%>
+
+	</tr>
+<% } %>

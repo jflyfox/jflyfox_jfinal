@@ -3,12 +3,19 @@ package com.flyfox.jfinal.config;
 import com.flyfox.jfinal.component.annotation.AutoBindModels;
 import com.flyfox.jfinal.component.annotation.AutoBindRoutes;
 import com.flyfox.jfinal.component.handler.BasePathHandler;
+import com.flyfox.jfinal.component.handler.CurrentPathHandler;
 import com.flyfox.jfinal.component.interceptor.SessionAttrInterceptor;
 
 import static com.flyfox.util.Config.getStr;
 
 import com.flyfox.util.Config;
 import com.flyfox.util.StrUtils;
+import com.flyfox.util.cache.Cache;
+import com.flyfox.util.cache.CacheManager;
+import com.flyfox.util.cache.ICacheManager;
+import com.flyfox.util.cache.MemCache;
+import com.flyfox.util.serializable.FSTSerializer;
+import com.flyfox.util.serializable.SerializerManage;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -93,7 +100,7 @@ public class JflyfoxConfig extends JFinalConfig {
 			arp.setDialect(new Sqlite3Dialect());
 		} else if (db_type.startsWith("oracle")) {
 			arp.setDialect(new OracleDialect());
-			arp.setContainerFactory(new CaseInsensitiveContainerFactory());
+			arp.setContainerFactory(new CaseInsensitiveContainerFactory(true));
 		}
 
 		new AutoBindModels(arp);
@@ -117,21 +124,39 @@ public class JflyfoxConfig extends JFinalConfig {
 		me.add(new BasePathHandler(Config.getStr("PATH.BASE_PATH")));
 		// 根目录获取
 		me.add(new ContextPathHandler(Config.getStr("PATH.CONTEXT_PATH")));
-	}
-
-	@Override
-	public void beforeJFinalStop() {
-		super.beforeJFinalStop();
+		// 当前获取
+		me.add(new CurrentPathHandler(Config.getStr("PATH.CURRENT_PATH")));
 	}
 
 	private boolean isDevMode() {
 		return Config.getToBoolean("CONSTANTS.DEV_MODE");
 	}
 
+	@Override
+	public void afterJFinalStart() {
+		super.afterJFinalStart();
+		
+		// 初始化Cache为fst序列化
+		SerializerManage.add("fst", new FSTSerializer());
+
+		CacheManager.setCache(new ICacheManager() {
+
+			public Cache getCache() {
+				return new MemCache(SerializerManage.get("fst"));
+			}
+		});
+	}
+	
+	@Override
+	public void beforeJFinalStop() {
+		super.beforeJFinalStop();
+	}
+	
 	public static void main(String[] args) {
 		String jdbcUrl = "jdbc:sqlite://{webroot}jflyfox_blog.db";
 		jdbcUrl = StrUtils.replaceOnce(jdbcUrl, CONFIG_WEB_ROOT,
 				"D:\\Project\\workspace\\jflyfox_blog\\src\\main\\webapp\\WEB-INF\\");
 		System.out.println(jdbcUrl);
 	}
+	
 }

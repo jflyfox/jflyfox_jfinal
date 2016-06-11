@@ -17,7 +17,12 @@ public class Attr {
 	/**
 	 * model前缀
 	 */
-	public static final String MODEL_NAME = Config.getStr("ATTR.MODEL_NAME");
+	public static final String PAGE_MODEL_NAME = Config.getStr("ATTR.MODEL_NAME");
+	
+	/**
+	 * attr前缀
+	 */
+	public static final String PAGE_ATTR_NAME = Config.getStr("ATTR.ATTR_NAME");
 
 	/**
 	 * 手机用户路径前缀

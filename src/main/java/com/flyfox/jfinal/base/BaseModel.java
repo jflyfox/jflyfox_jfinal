@@ -1,5 +1,6 @@
 package com.flyfox.jfinal.base;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Model;
@@ -10,13 +11,31 @@ import com.jfinal.plugin.activerecord.TableMapping;
 /**
  * Model 优化修改
  * 
- * @author flyfox
- * 2014-2-11
+ * @author flyfox 2014-2-11
  * @param <M>
  */
 public class BaseModel<M extends Model<M>> extends Model<M> {
 
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public Integer getInt(String attr) {
+		Object obj = get(attr);
+		if (obj == null) {
+			return null;
+		} else if (obj instanceof Integer) {
+			return (Integer) obj;
+		} else if (obj instanceof BigDecimal) {
+			return ((BigDecimal) obj).intValue();
+		} else if (obj instanceof String) {
+			try {
+				return Integer.parseInt((String) obj);
+			} catch (Exception e) {
+				throw new RuntimeException("String can not cast to Integer : " + attr.toString());
+			}
+		}
+		return null;
+	}
 
 	public Table getTable() {
 		return TableMapping.me().getTable(getClass());

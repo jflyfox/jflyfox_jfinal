@@ -137,7 +137,7 @@ public class UeditorController extends BaseController {
 		renderText(imgStr);
 	}
 
-	private List<File> getFiles(String realpath, List<File> files) {
+	protected List<File> getFiles(String realpath, List<File> files) {
 		File realFile = new File(realpath);
 		if (realFile.isDirectory()) {
 			File[] subfiles = realFile.listFiles();
@@ -154,13 +154,13 @@ public class UeditorController extends BaseController {
 		return files;
 	}
 
-	private String getRealPath(HttpServletRequest request, String path) {
+	protected String getRealPath(HttpServletRequest request, String path) {
 		ServletContext application = request.getSession().getServletContext();
 		String str = application.getRealPath(request.getServletPath());
 		return new File(str).getParent();
 	}
 
-	private String getFileTypeByimageManager(String fileName) {
+	protected String getFileTypeByimageManager(String fileName) {
 		String[] fileType = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 		Iterator<String> type = Arrays.asList(fileType).iterator();
 		while (type.hasNext()) {
@@ -300,7 +300,7 @@ public class UeditorController extends BaseController {
 
 	}
 
-	private String getFileTypeByRemoteImage(String fileName) {
+	protected String getFileTypeByRemoteImage(String fileName) {
 		String[] fileType = { ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 		Iterator<String> type = Arrays.asList(fileType).iterator();
 		while (type.hasNext()) {
