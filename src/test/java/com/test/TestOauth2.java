@@ -1,14 +1,14 @@
 package com.test;
 
 
-import com.flyfox.jfinal.component.oauth.OauthBaidu;
-import com.flyfox.jfinal.component.oauth.OauthDouban;
-import com.flyfox.jfinal.component.oauth.OauthOsc;
-import com.flyfox.jfinal.component.oauth.OauthQQ;
-import com.flyfox.jfinal.component.oauth.OauthRenren;
-import com.flyfox.jfinal.component.oauth.OauthSina;
-import com.flyfox.jfinal.component.oauth.util.Display;
-import com.flyfox.jfinal.component.oauth.util.TokenUtil;
+import com.jflyfox.jfinal.component.oauth.OauthBaidu;
+import com.jflyfox.jfinal.component.oauth.OauthDouban;
+import com.jflyfox.jfinal.component.oauth.OauthOsc;
+import com.jflyfox.jfinal.component.oauth.OauthQQ;
+import com.jflyfox.jfinal.component.oauth.OauthRenren;
+import com.jflyfox.jfinal.component.oauth.OauthSina;
+import com.jflyfox.jfinal.component.oauth.util.Display;
+import com.jflyfox.jfinal.component.oauth.util.TokenUtil;
 
 /**
  * Oauth 测试

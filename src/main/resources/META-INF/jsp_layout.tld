@@ -11,7 +11,7 @@
 	<tag>
 		<name>block</name>
 		<!--tag的名字 -->
-		<tag-class>com.flyfox.web.tag.BlockTag</tag-class>
+		<tag-class>com.jflyfox.web.tag.BlockTag</tag-class>
 		<!--其中对应的java类 -->
 		<body-content>jsp</body-content>
 		<!-- JSP,empty,scriptless,tagdependent JSP:接受所有JSP语法，如定制的或内部的tag、scripts、静态HTML、脚本元素、 
@@ -35,7 +35,7 @@
 
 	<tag>
 		<name>override</name>
-		<tag-class>com.flyfox.web.tag.OverrideTag</tag-class>
+		<tag-class>com.jflyfox.web.tag.OverrideTag</tag-class>
 		<body-content>jsp</body-content>
 
 		<attribute>
