@@ -1,2 +1,1 @@
-# jflyfox_jfinal
-jfinal extend
+#jflyfox_jfinal
