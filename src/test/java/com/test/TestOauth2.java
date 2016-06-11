@@ -1,3 +1,4 @@
+package com.test;
 
 
 import com.flyfox.jfinal.component.oauth.OauthBaidu;

@@ -1,3 +1,19 @@
+/**
+ * Copyright 2015-2025 FLY的狐狸(email:jflyfox@sina.com qq:369191470).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
 package com.flyfox.jfinal.base;
 
 import java.util.List;
@@ -7,17 +23,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.flyfox.jfinal.component.util.Attr;
-import com.flyfox.jfinal.template.TemplateUtils;
 import com.flyfox.util.Config;
 import com.flyfox.util.DateUtils;
 import com.flyfox.util.StrUtils;
 import com.flyfox.web.util.HandlerUtils;
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 
 /**
  * Controller 不能初始化
@@ -197,36 +208,6 @@ public abstract class BaseController extends Controller {
 	 */
 	public <T> T getModelByAttr(Class<T> modelClass) {
 		return super.getModel(modelClass, Attr.PAGE_ATTR_NAME);
-	}
-
-	/**
-	 * 下拉框，获取Json数据
-	 * 
-	 * 2015年1月8日 下午4:19:23
-	 * flyfox 330627517@qq.com
-	 * @param sql
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public String getJsonData(String sql, String key, String value) {
-		if (StrUtils.isEmpty(sql)) {
-			return "";
-		}
-
-		List<Record> list = Db.find(sql);
-		if (list == null || list.size() == 0) {
-			return "";
-		}
-
-		JSONArray array = new JSONArray();
-		for (Record record : list) {
-			JSONObject tmp = new JSONObject();
-			tmp.put(TemplateUtils.KEY, record.get(key));
-			tmp.put(TemplateUtils.VALUE, record.get(value));
-			array.add(tmp);
-		}
-		return array.toJSONString();
 	}
 
 }

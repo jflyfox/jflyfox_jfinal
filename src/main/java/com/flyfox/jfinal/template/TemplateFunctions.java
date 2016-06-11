@@ -1,9 +1,26 @@
+/**
+ * Copyright 2015-2025 FLY的狐狸(email:jflyfox@sina.com qq:369191470).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+
 package com.flyfox.jfinal.template;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TemplateFunctions extends TemplateUtils {
+public class TemplateFunctions {
 
 	// //////////////////////////////////产生随机数//////////////////////////////////
 	private static AtomicInteger bgNum = new AtomicInteger(0);
@@ -24,31 +41,4 @@ public class TemplateFunctions extends TemplateUtils {
 		return new Random().nextInt(num);
 	}
 
-	// //////////////////////////select 方法/////////////////////////////////
-	public static String sel(String jsonData, int selected_value) {
-		return sel(jsonData, selected_value + "");
-	}
-
-	public static String selValue(String jsonData, int key) {
-		return selValue(jsonData, key + "");
-	}
-
-	// //////////////////////////radio 方法/////////////////////////////////
-	public static String radio(String jsonData, String name, int selected_value) {
-		return radio(jsonData, name, selected_value + "");
-	}
-
-	public static String radioValue(String jsonData, int key) {
-		return radioValue(jsonData, key + "");
-	}
-
-	// //////////////////////////chechbox 方法/////////////////////////////////
-	public static String checkbox(String jsonData, String name, int selected_value) {
-		return checkbox(jsonData, name, selected_value + "");
-	}
-
-	public static String checkboxValue(String jsonData, int key) {
-		return checkboxValue(jsonData, key + "");
-	}
-	
 }
