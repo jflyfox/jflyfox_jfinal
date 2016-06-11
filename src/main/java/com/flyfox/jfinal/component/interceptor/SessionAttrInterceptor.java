@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import com.flyfox.jfinal.component.util.Attr;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 
 /**
@@ -33,7 +33,7 @@ import com.jfinal.core.Controller;
  */
 public class SessionAttrInterceptor implements Interceptor {
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		Controller controller = ai.getController();
 

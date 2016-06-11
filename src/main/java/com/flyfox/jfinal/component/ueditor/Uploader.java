@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -44,19 +45,16 @@ import com.flyfox.util.encrypt.Base64;
 /**
  * UEditor文件上传辅助类
  * 
- * #UEditor Config
- * # 保存路径
- * savePath=upload1,upload2,upload3
+ * #UEditor Config # 保存路径 savePath=upload1,upload2,upload3
  * 
- * # 上传文件名字格式
- * fileNameFormat={time}{rand:6}
+ * # 上传文件名字格式 fileNameFormat={time}{rand:6}
  * 
  * 需要引入：commons-fileupload-1.2.2.jar
  */
 public class Uploader {
 
 	// 文件大小常量, 单位kb
-	private static final int MAX_SIZE = 500 * 1024;
+	private static final int MAX_SIZE = 20 * 1000;
 	// 输出文件地址
 	private String url = "";
 	// 上传文件名
@@ -69,6 +67,8 @@ public class Uploader {
 	private String originalName = "";
 	// 文件大小
 	private String size = "";
+	// 文件名前缀
+	private String preFileName = "";
 
 	private HttpServletRequest request = null;
 	private String title = "";
@@ -115,11 +115,16 @@ public class Uploader {
 		// 未知错误
 		tmp.put("UNKNOWN", "\\u672a\\u77e5\\u9519\\u8bef");
 
-		this.parseParams();
-
 	}
 
 	public void upload() throws Exception {
+		// 解析参数
+		this.parseParams();
+		// 异常了
+		if (this.state != "") {
+			return;
+		}
+
 		boolean isMultipart = ServletFileUpload.isMultipartContent(this.request);
 		if (!isMultipart) {
 			this.state = this.errorInfo.get("NOFILE");
@@ -152,9 +157,7 @@ public class Uploader {
 			int count = -1;
 
 			while ((count = bis.read(buff)) != -1) {
-
 				fos.write(buff, 0, count);
-
 			}
 
 			bis.close();
@@ -259,6 +262,8 @@ public class Uploader {
 
 			}
 
+		} catch (SizeLimitExceededException e) {
+			this.state = this.errorInfo.get("SIZE") + "(" + maxSize/1024 + "Kb)";
 		} catch (Exception e) {
 			this.state = this.errorInfo.get("UNKNOWN");
 		}
@@ -272,7 +277,7 @@ public class Uploader {
 	 */
 	private String getName(String fileName) {
 		Random random = new Random();
-		return this.fileName = "" + random.nextInt(10000) + System.currentTimeMillis() + this.getFileExt(fileName);
+		return this.fileName = this.preFileName + "" + random.nextInt(10000) + System.currentTimeMillis() + this.getFileExt(fileName);
 	}
 
 	/**
@@ -374,5 +379,13 @@ public class Uploader {
 
 	public String getOriginalName() {
 		return this.originalName;
+	}
+
+	public String getPreFileName() {
+		return preFileName;
+	}
+
+	public void setPreFileName(String preFileName) {
+		this.preFileName = preFileName;
 	}
 }

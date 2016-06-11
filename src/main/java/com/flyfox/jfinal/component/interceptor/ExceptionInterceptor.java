@@ -19,7 +19,7 @@ package com.flyfox.jfinal.component.interceptor;
 
 import com.flyfox.util.Config;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Logger;
 
@@ -32,7 +32,7 @@ public class ExceptionInterceptor implements Interceptor {
 
 	private final static Logger log = Logger.getLogger(ExceptionInterceptor.class);
 
-	public void intercept(ActionInvocation ai) {
+	public void intercept(Invocation ai) {
 
 		try {
 			ai.invoke();
