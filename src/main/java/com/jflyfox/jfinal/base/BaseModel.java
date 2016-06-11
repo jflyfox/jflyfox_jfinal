@@ -82,22 +82,7 @@ public class BaseModel<M extends Model<M>> extends Model<M> {
 	 * @return Page
 	 */
 	public Page<M> paginate(Paginator paginator, String select, String sqlExceptSelect, Object... paras) {
-		return paginate(paginator.getPageNo(), paginator.getPageSize(), new String[] { select, sqlExceptSelect }, paras);
-	}
-
-	/**
-	 * Paginate.
-	 * 
-	 * @param paginator
-	 *            the page
-	 * @param sql
-	 *            the sql statement
-	 * @param paras
-	 *            the parameters of sql
-	 * @return Page
-	 */
-	public Page<M> paginateSql(Paginator paginator, String sql, Object... paras) {
-		return paginate(paginator.getPageNo(), paginator.getPageSize(), sql, paras);
+		return paginate(paginator.getPageNo(), paginator.getPageSize(), select, sqlExceptSelect, paras);
 	}
 
 	/**
