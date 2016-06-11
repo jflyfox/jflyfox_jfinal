@@ -1,19 +1,19 @@
 package com.flyfox.jfinal.config;
 
+import static com.flyfox.util.Config.getStr;
+
 import com.flyfox.jfinal.component.annotation.AutoBindModels;
 import com.flyfox.jfinal.component.annotation.AutoBindRoutes;
 import com.flyfox.jfinal.component.handler.BasePathHandler;
 import com.flyfox.jfinal.component.handler.CurrentPathHandler;
+import com.flyfox.jfinal.component.interceptor.ExceptionInterceptor;
 import com.flyfox.jfinal.component.interceptor.SessionAttrInterceptor;
-
-import static com.flyfox.util.Config.getStr;
-
 import com.flyfox.util.Config;
 import com.flyfox.util.StrUtils;
 import com.flyfox.util.cache.Cache;
 import com.flyfox.util.cache.CacheManager;
 import com.flyfox.util.cache.ICacheManager;
-import com.flyfox.util.cache.MemCache;
+import com.flyfox.util.cache.impl.MemorySerializeCache;
 import com.flyfox.util.serializable.FSTSerializer;
 import com.flyfox.util.serializable.SerializerManage;
 import com.jfinal.config.Constants;
@@ -48,6 +48,8 @@ public class JflyfoxConfig extends JFinalConfig {
 		me.setDevMode(isDevMode());
 		me.setViewType(ViewType.JSP); // 设置视图类型为Jsp，否则默认为FreeMarker
 		me.setBaseViewPath("/pages");
+		me.setError401View(Config.getStr("PAGES.401"));
+		me.setError403View(Config.getStr("PAGES.403"));
 		me.setLoggerFactory(new Log4jLoggerFactory());
 		me.setError404View(Config.getStr("PAGES.404"));
 		me.setError500View(Config.getStr("PAGES.500"));
@@ -110,6 +112,8 @@ public class JflyfoxConfig extends JFinalConfig {
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
+		// 异常拦截器，跳转到500页面
+		me.add(new ExceptionInterceptor());
 		// session model转换
 		me.add(new SessionInViewInterceptor());
 		// 设置session属性
@@ -135,28 +139,28 @@ public class JflyfoxConfig extends JFinalConfig {
 	@Override
 	public void afterJFinalStart() {
 		super.afterJFinalStart();
-		
+
 		// 初始化Cache为fst序列化
 		SerializerManage.add("fst", new FSTSerializer());
 
 		CacheManager.setCache(new ICacheManager() {
 
 			public Cache getCache() {
-				return new MemCache(SerializerManage.get("fst"));
+				return new MemorySerializeCache(SerializerManage.get("fst"));
 			}
 		});
 	}
-	
+
 	@Override
 	public void beforeJFinalStop() {
 		super.beforeJFinalStop();
 	}
-	
+
 	public static void main(String[] args) {
 		String jdbcUrl = "jdbc:sqlite://{webroot}jflyfox_blog.db";
 		jdbcUrl = StrUtils.replaceOnce(jdbcUrl, CONFIG_WEB_ROOT,
 				"D:\\Project\\workspace\\jflyfox_blog\\src\\main\\webapp\\WEB-INF\\");
 		System.out.println(jdbcUrl);
 	}
-	
+
 }

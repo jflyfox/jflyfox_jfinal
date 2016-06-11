@@ -1,0 +1,40 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+%>
+
+<% for(entry in crud.addMap){ %>
+	<tr>
+		<td>${entry.value.name}</td>
+		<td>
+		<%if (entry.value.formType=="INPUT") {%>
+
+			<% if (entry.value.inputType=='TEXT') { %>
+				<input class="form-control" type="text" name="model.${entry.value.key}" value="${model[entry.value.key] }" ${entry.value.formTypeVaild } />
+			<% } else if (entry.value.inputType=='RADIO') { %>
+				${flyfox.radio(entry.value.formTypeData,"model." + entry.value.key,model[entry.value.key]!'')  }
+			<% } else if (entry.value.inputType=='CHECKBOX') { %>
+				${flyfox.check(entry.value.formTypeData,"model." + entry.value.key,model[entry.value.key]!'')  }
+			<% } else { %>
+				<input class="form-control" type="${entry.value.inputType}" name="model.${entry.value.key}" value="${model[entry.value.key]}" ${entry.value.formTypeVaild } />
+			<% } %>
+
+		<% } else if (entry.value.formType=='TEXTAREA') { %>
+			<textarea class="form-control" rows="3" cols="30" name="model.${entry.value.key}">${model[entry.value.key]}</textarea>
+		<% }  else if (entry.value.formType=='DICT')  { %>
+			<select name="model.${entry.value.key}" class="form-control" >
+			${flyfox.dictSelect(entry.value.formTypeData , model[entry.value.key]!'')  }
+			</select>
+		<% }  else if (entry.value.formType=='SELECT') { 
+			var selectData = crud.selectMap[entry.value.key];
+		%>
+			<select name="model.${entry.value.key}" class="form-control" >
+			${flyfox.sel(selectData,model[entry.value.key]!'')  }
+			</select>
+		<% }%>
+		</td>
+	</tr>
+<% } %>
+
+<%
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+%>

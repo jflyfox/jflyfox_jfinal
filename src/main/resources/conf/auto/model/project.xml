@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<nodes>
+  <!--创建各个节点信息-->
+  <crud>
+    <cls>com.flyfox.modules.project.TbProject</cls>
+    <name>项目</name>
+    <primaryKey>id</primaryKey>
+    <urlKey>project</urlKey>
+  </crud>
+  <models>
+    <model>
+      <key>name</key>
+      <name>项目名称</name>
+      <formType>INPUT</formType>
+      <inputType>TEXT</inputType>
+      <formTypeVaild>required='required'</formTypeVaild>
+      <formTypeData></formTypeData>
+      <!--查询，列表，添加，编辑，查看；默认：01111-->
+      <operate>11111</operate>
+    </model>
+    <model>
+      <key>remark</key>
+      <name>说明</name>
+      <formType>TEXTAREA</formType>
+      <inputType>TEXT</inputType>
+      <formTypeVaild></formTypeVaild>
+      <formTypeData></formTypeData>
+      <!--查询，列表，添加，编辑，查看；默认：01111-->
+      <operate>1111</operate>
+    </model>
+  </models>
+</nodes>

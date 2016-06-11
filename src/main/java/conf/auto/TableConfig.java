@@ -68,7 +68,7 @@ public class TableConfig {
 		user.setPrimaryKey("userid");
 		user.setUrlKey("user");
 		user.setName("用户");
-		user.setAttr(new ModelAttr().setKey("username").setName("登陆名").addSearch()
+		user.setAttr(new ModelAttr().setKey("username").setName("登录名").addSearch()
 				.setFormTypeVaild("required='required'"));
 		user.setAttr(new ModelAttr().setKey("realname").setName("真实姓名").addSearch());
 		add(user);

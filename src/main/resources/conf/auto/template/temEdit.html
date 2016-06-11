@@ -1,0 +1,31 @@
+		# for(entry in crud.editMap){ #
+			<tr>
+				<td>@{entry.value.name}</td>
+				<td>
+				# if (entry.value.formType=="INPUT") { #
+					# if (entry.value.inputType=='TEXT') { #
+						<input class="form-control" type="text" name="model.@{entry.value.key}" value="${model.@{entry.value.key}}" @{entry.value.formTypeVaild } />
+					# } else if (entry.value.inputType=='RADIO') { #
+						<% var @{entry.value.key}_data = '@{entry.value.formTypeData}'; %>
+						${flyfox.radio(@{entry.value.key}_data,'model.@{entry.value.key}',model.@{entry.value.key}!'')  }
+					# } else if (entry.value.inputType=='CHECKBOX') { #
+						<% var @{entry.value.key}_data = '@{entry.value.formTypeData}'; %>
+						${flyfox.check(@{entry.value.key}_data,'model.@{entry.value.key}',model.@{entry.value.key}!'')  }
+					# } else { #
+						<input class="form-control" type="@{entry.value.inputType}" name="model.@{entry.value.key}" value="${model.@{entry.value.key}}" @{entry.value.formTypeVaild } />
+					# } #
+				# } else if (entry.value.formType=='TEXTAREA') { #
+					<textarea class="form-control" rows="3" cols="30" name="model.@{entry.value.key}">${model.@{entry.value.key}}</textarea>
+				# }  else if (entry.value.formType=='DICT') { #
+					<select name="model.@{entry.value.key}" class="form-control" >
+					${flyfox.dictSelect('@{entry.value.formTypeData}' , model.@{entry.value.key}!'')  }
+					</select>
+				# }  else if (entry.value.formType=='SELECT') { #
+					<% var @{entry.value.key}_data = '@{entry.value.formTypeData}'; %>
+					<select name="model.@{entry.value.key}" class="form-control" >
+					${flyfox.sel(@{entry.value.key}_data,model.@{entry.value.key}!'')  }
+					</select>
+				# }#
+				</td>
+			</tr>
+		# } #

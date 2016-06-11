@@ -27,6 +27,7 @@ public class BasePathHandler extends Handler {
 		String basePath = request.getScheme() + "://" + request.getServerName() //
 				+ ":" + request.getServerPort() + path + "/";
 		request.setAttribute(basePathName, basePath);
+		request.setAttribute("ctx", basePath);
 		nextHandler.handle(target, request, response, isHandled);
 	}
 

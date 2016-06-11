@@ -1,0 +1,11 @@
+<% 
+DIRECTIVE SAFE_OUTPUT_OPEN;
+%>
+<% for(entry in obj){ %>
+<label class="radio-inline">
+  <input type="radio" name="${entry.name}" id="${entry.id}" value="${entry.key}"  ${entry.selected=="true"?"checked":"" } > ${entry.value}
+</label>
+<% } %>
+<%
+DIRECTIVE SAFE_OUTPUT_CLOSE;
+%>
