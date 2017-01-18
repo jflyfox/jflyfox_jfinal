@@ -26,6 +26,10 @@ import de.ruedigermoeller.serialization.FSTObjectOutput;
 
 public class FSTSerializer implements Serializer {
 
+	public String name(){
+		return "fst";
+	}
+	
 	public byte[] serialize(Object obj) throws IOException {
 		ByteArrayOutputStream out = null;
 		FSTObjectOutput fout = null;
