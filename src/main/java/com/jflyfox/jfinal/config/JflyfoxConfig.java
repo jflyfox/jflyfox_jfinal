@@ -34,6 +34,7 @@ import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
+import com.jfinal.template.Engine;
 import com.jflyfox.jfinal.component.annotation.AutoBindModels;
 import com.jflyfox.jfinal.component.annotation.AutoBindRoutes;
 import com.jflyfox.jfinal.component.handler.BasePathHandler;
@@ -65,10 +66,9 @@ public class JflyfoxConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		me.setDevMode(isDevMode());
 		me.setViewType(ViewType.JSP); // 设置视图类型为Jsp，否则默认为FreeMarker
-		me.setBaseViewPath("/pages");
+		me.setLogFactory(new Log4jLogFactory());
 		me.setError401View(Config.getStr("PAGES.401"));
 		me.setError403View(Config.getStr("PAGES.403"));
-		me.setLogFactory(new Log4jLogFactory());
 		me.setError404View(Config.getStr("PAGES.404"));
 		me.setError500View(Config.getStr("PAGES.500"));
 	}
@@ -77,6 +77,7 @@ public class JflyfoxConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) {
+		me.setBaseViewPath("/pages");
 		// 自动绑定
 		// 1.如果没用加入注解，必须以Controller结尾,自动截取前半部分为key
 		// 2.加入ControllerBind的 获取 key
@@ -154,6 +155,13 @@ public class JflyfoxConfig extends JFinalConfig {
 		me.add(new CurrentPathHandler(Config.getStr("PATH.CURRENT_PATH")));
 	}
 
+	/**
+	 * 配置模板
+	 */
+	public void configEngine(Engine engine) {
+		
+	}
+	
 	private boolean isDevMode() {
 		return Config.getToBoolean("CONSTANTS.DEV_MODE");
 	}
