@@ -37,6 +37,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthSina extends Oauth {
     
+	private static final long serialVersionUID = 1L;
     private static final Log LOGGER = Log.getLog(OauthSina.class);
 
     private static final String AUTH_URL = "https://api.weibo.com/oauth2/authorize";

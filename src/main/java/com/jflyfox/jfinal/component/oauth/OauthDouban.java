@@ -34,6 +34,7 @@ import com.jflyfox.util.StrUtils;
 
 public class OauthDouban extends Oauth {
 
+	private static final long serialVersionUID = 1L;
     private static final Log logger = Log.getLog(OauthDouban.class);
 
     private static final String AUTH_URL = "https://www.douban.com/service/auth2/auth";

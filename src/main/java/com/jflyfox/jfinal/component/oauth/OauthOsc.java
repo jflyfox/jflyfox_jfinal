@@ -37,6 +37,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthOsc extends Oauth {
     
+	private static final long serialVersionUID = 1L;
     private static final Log LOGGER = Log.getLog(OauthOsc.class);
     
     private static final String AUTH_URL = "http://www.oschina.net/action/oauth2/authorize"; // 授权

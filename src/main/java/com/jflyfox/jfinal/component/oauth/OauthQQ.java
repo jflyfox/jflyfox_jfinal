@@ -38,6 +38,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthQQ extends Oauth{ 
 
+	private static final long serialVersionUID = 1L;
     private static final Log LOGGER = Log.getLog(OauthQQ.class);
     
     private static final String AUTH_URL = "https://graph.qq.com/oauth2.0/authorize";

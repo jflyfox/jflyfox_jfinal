@@ -37,6 +37,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthBaidu extends Oauth {
 
+	private static final long serialVersionUID = 1L;
 	private static final Log LOGGER = Log.getLog(OauthBaidu.class);
 
 	private static final String AUTH_URL = "https://openapi.baidu.com/oauth/2.0/authorize";

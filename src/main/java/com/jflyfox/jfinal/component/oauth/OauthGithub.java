@@ -37,6 +37,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthGithub extends Oauth {
 
+	private static final long serialVersionUID = 1L;
     private static final Log LOGGER = Log.getLog(OauthGithub.class);
 
     private static final String AUTH_URL = "https://github.com/login/oauth/authorize";

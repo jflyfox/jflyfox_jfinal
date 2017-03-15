@@ -18,6 +18,7 @@
 package com.jflyfox.jfinal.component.oauth;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -29,8 +30,10 @@ import com.jflyfox.jfinal.component.oauth.util.HttpKit;
 /**
  * Oauth 授权
  */
-public class Oauth {
+public class Oauth implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String clientId;
 	private String clientSecret;
 	private String redirectUri;

@@ -35,6 +35,7 @@ import com.jflyfox.util.StrUtils;
  */
 public class OauthRenren extends Oauth {
 
+	private static final long serialVersionUID = 1L;
     private static final Log LOGGER = Log.getLog(OauthRenren.class);
     
     private static final String AUTH_URL = "https://graph.renren.com/oauth/authorize";
