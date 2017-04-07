@@ -17,13 +17,25 @@
 package com.jflyfox.jfinal.base;
 
 import com.jfinal.plugin.activerecord.Model;
+import com.jflyfox.util.StrUtils;
 
 public class SessionUser<M extends Model<M>> extends BaseModel<M> {
 
 	private static final long serialVersionUID = 1L;
 
-	public Integer getUserID() {
+	public Integer getUserid() {
 		return getInt("userid") == null ? -1 : getInt("userid");
+	}
+	
+	public String getUserName() {
+		if (StrUtils.isNotEmpty(getStr("realname"))) {
+			return getStr("realname");	
+		}
+		return getStr("username");
+	}
+	
+	public Integer getBackSiteId() {
+		return getInt("back_site_id");
 	}
 
 }
