@@ -4,9 +4,9 @@
 
 	<groupId>com.jflyfox</groupId>
 	<artifactId>jflyfox_jfinal</artifactId>
-	<version>4.5</version>
+	<version>4.5.0</version>
 	<packaging>jar</packaging>
-	<name>jflyfox</name>
+	<name>jflyfox_jfinal</name>
 	<description>jflyfox jfinal extend</description>
 	<url>https://github.com/jflyfox/jflyfox_jfinal</url>
 
